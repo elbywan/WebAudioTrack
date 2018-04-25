@@ -30,6 +30,7 @@
 
             self.context = window.currentAudioContext;
             self.sampleRate = self.context.sampleRate;
+            self.desiredSampRate = config.desiredSampRate;
             self.bufferSize = config.bufferSize || 4096;
             self.numberOfAudioChannels = config.numberOfAudioChannels || 1;
             self.volume = 1;
@@ -152,14 +153,15 @@
 
             mergeLeftRightBuffers({
                 sampleRate: this.sampleRate,
+                desiredSampRate: this.desiredSampRate,
                 numberOfAudioChannels: this.numberOfAudioChannels,
                 internalInterleavedLength: this.recordingLength,
                 leftBuffers: this.leftChannel,
                 rightBuffers: this.numberOfAudioChannels === 1 ? [] : this.rightChannel
             }, function(buffer, view) {
-                //this.blob = new Blob([view], {
-                //    type: 'audio/wav'
-                //});
+                this.blob = new Blob([view], {
+                   type: 'audio/wav'
+                });
 
                 this.audioData = this._decodeAudio(buffer, function() {
                     callback && callback();
