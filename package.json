@@ -1,6 +1,6 @@
 {
   "name": "webaudiotrack-fork-elbywan",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A simple plugin for recording and playing audio",
   "main": "WebAudioTrack.js",
   "dependencies": {},
