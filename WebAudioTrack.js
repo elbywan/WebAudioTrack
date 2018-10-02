@@ -492,8 +492,9 @@
     }
 
     function processInWebWorker(_function) {
-        var workerURL = URL.createObjectURL(new Blob([_function.toString(),
-            ';this.onmessage =  function (e) {' + _function.name + '(e.data);}'
+        var workerURL = URL.createObjectURL(new Blob([
+            'var fun = ' + _function.toString() + ';',
+            'this.onmessage = function (e) { fun(e.data); }'
         ], {
             type: 'application/javascript'
         }));
